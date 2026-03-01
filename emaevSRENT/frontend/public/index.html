@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СпортПрокат - Аренда спортивного инвентаря</title>
+    
+    <!-- 
+        Файл: frontend/public/index.html
+        Главная HTML страница React SPA приложения
+        
+        Подключаем React через CDN для работы без npm/node
+        @author Студент
+        @version 1.0
+    -->
+    
+    <!-- React и ReactDOM из CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    
+    <!-- Babel для компиляции JSX в браузере -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Подключаем наши стили -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Дополнительные стили для React компонентов */
+        
+        /* Лоадер загрузки */
+        .loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+        }
+        
+        .loader-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Уведомления */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .notification.success {
+            background: #27ae60;
+        }
+        
+        .notification.error {
+            background: #e74c3c;
+        }
+        
+        .notification.info {
+            background: #3498db;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Модальное окно */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        /* Кнопки действий */
+        .btn-primary {
+            background: #3498db;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+        
+        .btn-secondary {
+            background: #95a5a6;
+        }
+        
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+        
+        .btn-danger {
+            background: #e74c3c;
+        }
+        
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        
+        /* Форма добавления в корзину */
+        .add-to-cart-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .days-input {
+            width: 70px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        /* Пустая корзина */
+        .empty-cart {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        
+        .empty-cart p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        /* Страница успеха заказа */
+        .order-success {
+            text-align: center;
+            padding: 40px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 30px auto;
+            max-width: 600px;
+        }
+        
+        .order-success h1 {
+            color: #27ae60;
+            margin-bottom: 20px;
+        }
+        
+        .order-details {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        /* Адаптивность для React */
+        @media (max-width: 768px) {
+            .modal-content {
+                margin: 20px;
+                padding: 20px;
+            }
+            
+            .notification {
+                left: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Корневой элемент для React приложения -->
+    <div id="root">
+        <!-- Здесь будет отрисован React -->
+        <div class="loader">
+            <div class="loader-spinner"></div>
+        </div>
+    </div>
+    
+    <!-- 
+        Подключаем React компоненты в правильном порядке:
+        1. API сервис для работы с бекендом
+        2. Компоненты (Header, Footer, ProductCard и т.д.)
+        3. Страницы (Home, Catalog, Cart и т.д.)
+        4. Главное приложение (App.js)
+    -->
+    
+    <!-- API сервис -->
+    <script type="text/babel" src="src/services/api.js"></script>
+    
+    <!-- React компоненты -->
+    <script type="text/babel" src="src/components/Notification.js"></script>
+    <script type="text/babel" src="src/components/Header.js"></script>
+    <script type="text/babel" src="src/components/Footer.js"></script>
+    <script type="text/babel" src="src/components/ProductCard.js"></script>
+    <script type="text/babel" src="src/components/CartItem.js"></script>
+    <script type="text/babel" src="src/components/Loader.js"></script>
+    
+    <!-- Страницы React -->
+    <script type="text/babel" src="src/pages/Home.js"></script>
+    <script type="text/babel" src="src/pages/Catalog.js"></script>
+    <script type="text/babel" src="src/pages/Cart.js"></script>
+    <script type="text/babel" src="src/pages/Checkout.js"></script>
+    <script type="text/babel" src="src/pages/Login.js"></script>
+    <script type="text/babel" src="src/pages/Register.js"></script>
+    <script type="text/babel" src="src/pages/Forgot.js"></script>
+    
+    <!-- Главное приложение -->
+    <script type="text/babel" src="src/App.js"></script>
+</body>
+</html>
